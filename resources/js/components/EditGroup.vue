@@ -4,8 +4,8 @@
         style="margin: 0px auto;"
     >
         <div class="col-md-8 chat">
-            <h3>Thêm phòng chat</h3>
-            <form @submit="addRoom">
+            <h3>Chỉnh sửa phòng chat</h3>
+            <form @submit="editRoom">
                 <div class="form-group">
                     <label for="name">Tên phòng</label>
                     <input
@@ -45,23 +45,33 @@
 
 <script>
 import axios from "axios";
-import swal from 'sweetalert';
 
 export default {
-    name: "AddGroup",
+    name: "EditGroup",
     data() {
         return {
             name: "",
             description: "",
+            roomId: this.$route.params.roomId,
             isLoading: false
         };
     },
     methods: {
-        async addRoom(event) {
+        async getRoom(){
+            try {
+                const res = await axios.get(`${this.roomId}`);
+                console.log(res.data);
+                this.name = res.data.name;
+                this.description = res.data.description;
+            } catch (error) {
+                console.log(error);
+            }
+        },
+        async editRoom(event) {
             event.preventDefault();
             try {
                 this.isLoading = true;
-                const res = await axios.post(`/add-room`, {
+                const res = await axios.post(`${this.roomId}`, {
                     name: this.name,
                     description: this.description
                 });
@@ -70,11 +80,12 @@ export default {
                 console.log(error);
             } finally {
                 this.isLoading = false;
-                this.name = "";
-                this.description = "";
-                swal("Success!", "Tạo group chat thành công!", "success");
+                swal("Success!", "Chỉnh sửa phòng chat thành công!", "success");
             }
         }
+    },
+    created(){
+        this.getRoom();
     }
 };
 </script>

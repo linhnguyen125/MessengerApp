@@ -13,9 +13,9 @@
                         <router-link
                             tag="a"
                             :to="{ name: 'add.room' }"
-                            class="mr-2"
+                            class="mr-2 add-room"
                         >
-                            <span class="text-white"
+                            <span class="text-white add-room-icon"
                                 ><i class="fas fa-plus"></i
                             ></span>
                         </router-link>
@@ -39,19 +39,42 @@
                 <div class="card-body contacts_body">
                     <div class="contacts">
                         <li v-for="room in tempRooms" :key="room.id">
-                            <router-link
-                                :to="`/rooms/${room.id}`"
-                                class="text-bolder"
+                            <div
+                                class="d-flex justify-content-between bd-highlight"
                             >
-                                <div class="d-flex bd-highlight">
+                                <router-link
+                                    :to="`/rooms/${room.id}`"
+                                    class="text-bolder"
+                                >
                                     <div class="user_info">
                                         <span>{{ room.name }}</span>
                                         <p v-if="room.description">
                                             {{ room.description }}
                                         </p>
                                     </div>
+                                </router-link>
+
+                                <!-- <span class="text-white"><i class="fas fa-trash-alt"></i></span> -->
+                                <div class="d-flex align-items-center">
+                                    <div class="dropdown mr-1">
+                                        <span
+                                            class="more-action"
+                                            id="more-action"
+                                            data-toggle="dropdown"
+                                        >
+                                            <span class="text-white"><i class="fas fa-ellipsis-v"></i></span>
+                                        </span>
+                                        <div class="dropdown-menu" aria-labelledby="more-action">
+                                            <router-link class="dropdown-item" tag="a" :to="{ name: 'edit.room', params: {roomId: room.id } }">
+                                                <span><i class="fas fa-edit"></i> Chỉnh sửa</span>
+                                            </router-link>
+                                            <a class="dropdown-item" href="javascript-void(0)" onclick="return false;" @click="deleteRoom(room.id)">
+                                                <span><i class="fas fa-trash-alt"></i> Xóa group</span>
+                                            </a>
+                                        </div>
+                                    </div>
                                 </div>
-                            </router-link>
+                            </div>
                         </li>
                     </div>
                 </div>
@@ -63,6 +86,7 @@
 
 <script>
 import axios from "axios";
+import swal from 'sweetalert';
 
 export default {
     data() {
@@ -89,7 +113,20 @@ export default {
             } catch (error) {
                 console.log(error);
             }
-        }
+        },
+        async deleteRoom(id){
+            try{
+                const res = await axios.post(`delete-room`, {
+                    id: id
+                });
+                console.log(res);
+            } catch (error) {
+                console.log(error)
+            } finally {
+                swal("Success!", "Xóa group chat thành công!", "success");
+                this.getRooms();
+            }
+        },
     },
     created() {
         this.getRooms();
@@ -104,3 +141,52 @@ export default {
     }
 };
 </script>
+
+<style scoped>
+.more-action{
+    background-color: rgb(75, 117, 233);
+}
+
+.more-action:hover{
+    background-color: rgb(31, 86, 238);
+}
+
+.add-room{
+    text-align: center;
+    padding: auto 0px;
+}
+
+.add-room-icon{
+    display: block;
+    height: 25px;
+    width: 25px;
+    background-color: rgb(66, 70, 114);
+    border-radius: 50%;
+}
+
+.add-room-icon:hover{
+    display: block;
+    height: 25px;
+    width: 25px;
+    background-color: rgb(31, 36, 75);
+    border-radius: 50%;
+}
+
+span.more-action{
+    display: block;
+    width: 25px;
+    height: 25px;
+    background-color: rgb(66, 70, 114);
+    border-radius: 75%;
+    text-align: center;
+}
+
+span.more-action:hover{
+    display: block;
+    width: 25px;
+    height: 25px;
+    background-color: rgb(31, 36, 75);
+    border-radius: 50%;
+    text-align: center;
+}
+</style>

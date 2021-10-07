@@ -30,7 +30,7 @@
         </div>
         <div class="img_cont_msg" data-toggle="tooltip" data-placement="top"
              :title="`${message.sender.name} (${message.sender.email})`">
-            <img src="/images/current_user.jpg" class="rounded-circle user_img_msg">
+            <img :src="`http://127.0.0.1:8000/${message.sender.avatar}`" class="rounded-circle user_img_msg">
         </div>
     </div>
     <div

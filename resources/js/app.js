@@ -9,9 +9,9 @@ import router from "./router";
 import "./filters";
 import "./services/confetti";
 
-require('./bootstrap');
+require("./bootstrap");
 
-window.Vue = require('vue');
+window.Vue = require("vue");
 
 Vue.prototype.$axios = axios;
 Vue.prototype.$Echo = Echo;
@@ -36,13 +36,12 @@ Vue.prototype.$Echo = Echo;
  */
 
 const app = new Vue({
-    render: (h) => h(App),
+    render: h => h(App),
     router,
     data: {
         user: window.__app__.user, // we always have user if they login as we return user object in app.blade.php
         rooms: window.__app__.rooms,
         emojis: window.__app__.emojis,
-        appName:
-            "Realtime Chat | Laravel, VueJS, Redis, Laravel Echo, SocketIO",
+        appName: "Realtime Chat | Laravel, VueJS, Redis, Laravel Echo, SocketIO"
     },
 }).$mount("#app");

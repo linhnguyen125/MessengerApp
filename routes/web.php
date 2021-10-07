@@ -38,3 +38,9 @@ Route::post('/add-room', 'RoomController@add')->middleware('auth');
 
 Route::get('get-rooms', 'RoomController@index')->middleware('auth');
 
+Route::get('edit-room/{id}', 'RoomController@show')->middleware('auth');
+
+Route::post('edit-room/{id}', 'RoomController@update')->middleware('auth');
+
+Route::post('delete-room', 'RoomController@delete')->middleware('auth');
+
