@@ -17,7 +17,7 @@
                     <div class="d-flex bd-highlight">
                         <div class="img_cont">
                             <img
-                                :src="user.id === $root.user.id ? '/images/current_user.jpg' : '/images/other_user.jpg'"
+                                :src="`http://127.0.0.1:8000/${user.avatar}`"
                                 class="rounded-circle user_img"
                             >
                             <span class="online_icon"></span>
@@ -28,8 +28,8 @@
                                 class="badge badge-danger font-12px"
                                 v-if="user.new_messages"
                             >
-                {{ user.new_messages }}
-              </span>
+                                {{ user.new_messages }}
+                            </span>
                             <p>{{ user.email }}</p>
                         </div>
                     </div>

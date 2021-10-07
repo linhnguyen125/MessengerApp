@@ -5,7 +5,7 @@
                 <div class="user_info">
                     <span>{{ currentRoom.name }}</span>
                 </div>
-                <div class="text-white ml-3">
+                <div class="description text-white ml-3">
                     {{ currentRoom.description }}
                 </div>
             </div>

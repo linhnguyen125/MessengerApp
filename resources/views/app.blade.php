@@ -17,9 +17,9 @@
 
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="author" content="Mai Trung Duc">
-    <meta name="description" content="Realtime chat app using Laravel, VueJS, Redis, Laravel Echo, SocketIO">
-    <meta name="keywords" content="Realtime chat app, Laravel, VueJS, Laravel Echo, Redis, SocketIO">
+    <meta name="author" content="Nguyen Van Linh">
+    <meta name="description" content="Realtime chat app using Laravel, VueJS, Redis, SocketIO">
+    <meta name="keywords" content="Realtime chat app, Laravel, VueJS, Redis, SocketIO">
 
     <title>Realtime Chat | Laravel, VueJS, Redis, Laravel Echo, SocketIO</title>
 
@@ -27,7 +27,7 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.0/css/bootstrap.min.css"
           integrity="sha384-SI27wrMjH3ZZ89r4o+fGIJtnzkAnFs3E4qz9DIYioCQ5l9Rd/7UAa8DHcaL8jkWt" crossorigin="anonymous">
     <link rel="stylesheet" href="{{ asset('css/font_awesome/all.min.css') }}">
-    <link rel="icon favicon" href="{{ asset('images/favicon.png') }}">
+    <link rel="icon" href="{{asset('images/messenger.ico')}}" type="image/x-icon" />
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,400i,700,700i&display=swap" rel="stylesheet">
 

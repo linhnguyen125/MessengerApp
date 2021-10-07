@@ -1,9 +1,9 @@
 <template>
     <footer id="footer" class="w-100">
         <div>
-            This demo using Laravel, VueJS, Laravel Echo, Redis, SocketIO.
-            <a href="https://github.com/maitrungduc1410/realtime-chatapp-laravelecho-socketio" target="_blank">
-                (Source code)
+            Messenger using Laravel, VueJS, Redis, SocketIO.
+            <a href="#" target="_blank">
+                (Dấu bé 3)
             </a>
         </div>
         <div>

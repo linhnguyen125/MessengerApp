@@ -2,6 +2,7 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import ListRoom from './pages/ListRoom'
 import Room from './pages/Room'
+import AddGroup from './components/AddGroup'
 
 Vue.use(VueRouter)
 
@@ -15,6 +16,11 @@ const routes = [
         path: '/rooms/:roomId',
         name: 'room',
         component: Room
+    },
+    {
+        path: '/add-room',
+        name: 'add.room',
+        component: AddGroup
     }
 ]
 
