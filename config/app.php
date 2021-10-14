@@ -175,6 +175,11 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
 
+        //Social login
+        Laravel\Socialite\SocialiteServiceProvider::class,
+        // Upload file vuejs
+        Intervention\Image\ImageServiceProvider::class,
+
     ],
 
     /*
@@ -227,6 +232,10 @@ return [
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
 
+        //Social login
+        'Socialite' => Laravel\Socialite\Facades\Socialite::class,
+        //Upload file vuejs
+        'Image' => Intervention\Image\Facades\Image::class,
     ],
 
 ];

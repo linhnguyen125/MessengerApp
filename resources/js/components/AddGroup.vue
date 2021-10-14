@@ -5,7 +5,7 @@
     >
         <div class="col-md-8 chat">
             <h3>Thêm phòng chat</h3>
-            <form @submit="addRoom">
+            <form @submit="addRoom" enctype="multipart/form-data">
                 <div class="form-group">
                     <label for="name">Tên phòng</label>
                     <input
@@ -23,6 +23,26 @@
                         id="description"
                         v-model="description"
                     />
+                </div>
+                <div class="row">
+                    <div class="form-group col-md-9">
+                        <label for="thumbnail">Ảnh đại diện</label>
+                        <input
+                            type="file"
+                            class="form-control-file"
+                            id="thumbnail"
+                            ref="file"
+                            v-on:change="onFileChange"
+                        />
+                    </div>
+                    <div v-if="image" class="col-md-3">
+                        <img
+                            :src="image"
+                            class="img-response"
+                            height="70px"
+                            width="auto"
+                        />
+                    </div>
                 </div>
                 <button
                     type="submit"
@@ -45,7 +65,7 @@
 
 <script>
 import axios from "axios";
-import swal from 'sweetalert';
+import swal from "sweetalert";
 
 export default {
     name: "AddGroup",
@@ -53,19 +73,34 @@ export default {
         return {
             name: "",
             description: "",
+            image: "",
             isLoading: false
         };
     },
     methods: {
+        onFileChange(e) {
+            let files = e.target.files || e.dataTransfer.files;
+            if (!files.length) return;
+            this.createImage(files[0]);
+        },
+        createImage(file) {
+            let reader = new FileReader();
+            let vm = this;
+            reader.onload = e => {
+                vm.image = e.target.result;
+            };
+            reader.readAsDataURL(file);
+        },
         async addRoom(event) {
             event.preventDefault();
             try {
                 this.isLoading = true;
                 const res = await axios.post(`/add-room`, {
                     name: this.name,
-                    description: this.description
+                    description: this.description,
+                    thumbnail: this.image
                 });
-                console.log(res.message);
+                console.log(res);
             } catch (error) {
                 console.log(error);
             } finally {

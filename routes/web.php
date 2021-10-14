@@ -16,6 +16,10 @@ use Illuminate\Support\Facades\Route;
 
 Auth::routes();
 
+//Social login
+Route::get('auth/redirect/{provider_name}', 'Auth\SocialController@redirect')->name('redirect');
+Route::get('auth/callback/{provider_name}', 'Auth\SocialController@callback');
+
 Route::get('/home', 'HomeController@index')->name('home');
 
 Route::get('/user-login', 'HomeController@userLogin');
@@ -28,7 +32,7 @@ Route::post('/messages', 'MessageController@store')->middleware('auth');
 
 Route::post('/reactions', 'ReactionController@react')->middleware('auth');
 
-// Route::get('/{any}', 'AppController@index')->where('any', '.*')->middleware('auth'); // catch all routes or else it will return 404 with Vue router in history mode
+Route::get('/rooms/{any}', 'AppController@index')->where('any', '.*')->middleware('auth'); // catch all routes or else it will return 404 with Vue router in history mode
 
 Route::post('/update/{id}', 'HomeController@update')->name('update')->middleware('auth');
 

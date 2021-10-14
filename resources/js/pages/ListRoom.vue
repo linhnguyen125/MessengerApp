@@ -47,10 +47,21 @@
                                     class="text-bolder"
                                 >
                                     <div class="user_info">
-                                        <span>{{ room.name }}</span>
-                                        <p v-if="room.description">
+                                        <div
+                                            class="d-flex justify-content-center align-items-center p-2"
+                                        >
+                                            <img
+                                                class="rounded-circle img-thumbnail"
+                                                :src="`${room.thumbnail}`"
+                                            />
+                                            <span class="ml-1">{{
+                                                room.name
+                                            }}</span>
+                                        </div>
+
+                                        <!-- <p class="description" v-if="room.description">
                                             {{ room.description }}
-                                        </p>
+                                        </p> -->
                                     </div>
                                 </router-link>
 
@@ -62,14 +73,41 @@
                                             id="more-action"
                                             data-toggle="dropdown"
                                         >
-                                            <span class="text-white"><i class="fas fa-ellipsis-v"></i></span>
+                                            <span class="text-white"
+                                                ><i
+                                                    class="fas fa-ellipsis-v"
+                                                ></i
+                                            ></span>
                                         </span>
-                                        <div class="dropdown-menu" aria-labelledby="more-action">
-                                            <router-link class="dropdown-item" tag="a" :to="{ name: 'edit.room', params: {roomId: room.id } }">
-                                                <span><i class="fas fa-edit"></i> Chỉnh sửa</span>
+                                        <div
+                                            class="dropdown-menu"
+                                            aria-labelledby="more-action"
+                                        >
+                                            <router-link
+                                                class="dropdown-item"
+                                                tag="a"
+                                                :to="{
+                                                    name: 'edit.room',
+                                                    params: { roomId: room.id }
+                                                }"
+                                            >
+                                                <span
+                                                    ><i class="fas fa-edit"></i>
+                                                    Chỉnh sửa</span
+                                                >
                                             </router-link>
-                                            <a class="dropdown-item" href="javascript-void(0)" onclick="return false;" @click="deleteRoom(room.id)">
-                                                <span><i class="fas fa-trash-alt"></i> Xóa group</span>
+                                            <a
+                                                class="dropdown-item"
+                                                href="javascript-void(0)"
+                                                onclick="return false;"
+                                                @click="deleteRoom(room.id)"
+                                            >
+                                                <span
+                                                    ><i
+                                                        class="fas fa-trash-alt"
+                                                    ></i>
+                                                    Xóa group</span
+                                                >
                                             </a>
                                         </div>
                                     </div>
@@ -86,7 +124,7 @@
 
 <script>
 import axios from "axios";
-import swal from 'sweetalert';
+import swal from "sweetalert";
 
 export default {
     data() {
@@ -114,19 +152,19 @@ export default {
                 console.log(error);
             }
         },
-        async deleteRoom(id){
-            try{
+        async deleteRoom(id) {
+            try {
                 const res = await axios.post(`delete-room`, {
                     id: id
                 });
                 console.log(res);
             } catch (error) {
-                console.log(error)
+                console.log(error);
             } finally {
                 swal("Success!", "Xóa group chat thành công!", "success");
                 this.getRooms();
             }
-        },
+        }
     },
     created() {
         this.getRooms();
@@ -143,20 +181,20 @@ export default {
 </script>
 
 <style scoped>
-.more-action{
+.more-action {
     background-color: rgb(75, 117, 233);
 }
 
-.more-action:hover{
+.more-action:hover {
     background-color: rgb(31, 86, 238);
 }
 
-.add-room{
+.add-room {
     text-align: center;
     padding: auto 0px;
 }
 
-.add-room-icon{
+.add-room-icon {
     display: block;
     height: 25px;
     width: 25px;
@@ -164,7 +202,7 @@ export default {
     border-radius: 50%;
 }
 
-.add-room-icon:hover{
+.add-room-icon:hover {
     display: block;
     height: 25px;
     width: 25px;
@@ -172,7 +210,7 @@ export default {
     border-radius: 50%;
 }
 
-span.more-action{
+span.more-action {
     display: block;
     width: 25px;
     height: 25px;
@@ -181,12 +219,27 @@ span.more-action{
     text-align: center;
 }
 
-span.more-action:hover{
+span.more-action:hover {
     display: block;
     width: 25px;
     height: 25px;
     background-color: rgb(31, 36, 75);
     border-radius: 50%;
     text-align: center;
+}
+.logo-thumbnail {
+    margin: auto 0px;
+}
+
+p.description {
+    margin-bottom: 0px !important;
+    margin-top: 5px;
+    margin-left: 50px;
+}
+
+img.img-thumbnail {
+    width: 35px;
+    height: 35px;
+    padding: 1px !important;
 }
 </style>

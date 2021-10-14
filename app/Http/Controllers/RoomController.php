@@ -15,10 +15,18 @@ class RoomController extends Controller
 
     public function add(Request $request)
     {
+        if ($request->get('thumbnail')) {
+            $image = $request->get('thumbnail');
+            $name = time() . '.' . explode('/', explode(':', substr($image, 0, strpos($image, ';')))[1])[1];
+            \Image::make($request->get('thumbnail'))->save(public_path('images/chat/') . $name);
+        }
+
         $data = [
             'name' => $request->name,
-            'description' => $request->description
+            'description' => $request->description,
+            'thumbnail' => 'http://127.0.0.1:8000/images/chat/' . $name
         ];
+
         $newRoom = ChatRoom::create($data);
         if ($newRoom) {
             return ['message' => "Tạo phòng thành công"];
@@ -27,7 +35,8 @@ class RoomController extends Controller
         }
     }
 
-    public function show(Request $request){
+    public function show(Request $request)
+    {
         $room = ChatRoom::find($request->id);
         return $room;
     }
@@ -46,7 +55,8 @@ class RoomController extends Controller
         }
     }
 
-    public function delete(Request $request){
+    public function delete(Request $request)
+    {
         $room = ChatRoom::find($request->id);
         $status =  $room->delete();
         return $status;

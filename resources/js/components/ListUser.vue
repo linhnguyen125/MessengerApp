@@ -17,7 +17,7 @@
                     <div class="d-flex bd-highlight">
                         <div class="img_cont">
                             <img
-                                :src="`http://127.0.0.1:8000/${user.avatar}`"
+                                :src="`${user.avatar}`"
                                 class="rounded-circle user_img"
                             >
                             <span class="online_icon"></span>

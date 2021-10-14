@@ -55,7 +55,7 @@ class HomeController extends Controller
         if ($request->hasFile('avatar')) {
             $file = $request->avatar;
             $fileName = $file->getClientOriginalName();
-            $path = 'images/avatars/' . $fileName;
+            $path = 'http://127.0.0.1:8000/images/avatars/' . $fileName;
             $file->move('images/avatars', $fileName);
         } else {
             return back();
