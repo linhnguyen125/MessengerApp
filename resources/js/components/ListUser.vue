@@ -14,7 +14,7 @@
             <div class="contacts">
                 <li v-for="user in filteredUsersList" :key="user.id" @click="$emit('selectReceiver', user)">
                     <div class="current-user-mark" v-if="user.id === $root.user.id"/>
-                    <div class="d-flex bd-highlight">
+                    <div class="d-flex bd-highlight align-items-center">
                         <div class="img_cont">
                             <img
                                 :src="`${user.avatar}`"
@@ -30,7 +30,7 @@
                             >
                                 {{ user.new_messages }}
                             </span>
-                            <p>{{ user.email }}</p>
+                            <p class="user-email">{{ user.email }}</p>
                         </div>
                     </div>
                 </li>
@@ -60,6 +60,8 @@
     }
 </script>
 
-<style>
-
+<style scoped>
+p.user-email {
+    margin: 0px;
+}
 </style>

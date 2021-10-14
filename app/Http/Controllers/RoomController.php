@@ -15,17 +15,17 @@ class RoomController extends Controller
 
     public function add(Request $request)
     {
+        $data = [
+            'name' => $request->name,
+            'description' => $request->description,
+        ];
+
         if ($request->get('thumbnail')) {
             $image = $request->get('thumbnail');
             $name = time() . '.' . explode('/', explode(':', substr($image, 0, strpos($image, ';')))[1])[1];
             \Image::make($request->get('thumbnail'))->save(public_path('images/chat/') . $name);
-        }
-
-        $data = [
-            'name' => $request->name,
-            'description' => $request->description,
-            'thumbnail' => 'http://127.0.0.1:8000/images/chat/' . $name
-        ];
+            $data['thumbnail'] = 'http://127.0.0.1:8000/images/chat/' . $name;
+        } 
 
         $newRoom = ChatRoom::create($data);
         if ($newRoom) {
@@ -43,10 +43,31 @@ class RoomController extends Controller
 
     public function update(Request $request)
     {
+        $room = ChatRoom::find($request->id);
+        if ($room->thumbnail === $request->thumbnail) {
+            $thumbnail = $request->thumbnail;
+        } else {
+            if ($request->get('thumbnail')) {
+                $image = $request->get('thumbnail');
+                $name = time() . '.' . explode('/', explode(':', substr($image, 0, strpos($image, ';')))[1])[1];
+                \Image::make($request->get('thumbnail'))->save(public_path('images/chat/') . $name);
+                //delete old image
+                $arrayImage = explode('/', $room->thumbnail);
+                $oldImage = end($arrayImage);
+                if ($oldImage !== 'default.jpg') {
+                    unlink(public_path('images/chat/') . $oldImage);
+                }
+                //create new image
+                $thumbnail = 'http://127.0.0.1:8000/images/chat/' . $name;
+            }
+        }
+
         $data = [
             'name' => $request->name,
-            'description' => $request->description
+            'description' => $request->description,
+            'thumbnail' => $thumbnail
         ];
+
         $newRoom = ChatRoom::where('id', $request->id)->update($data);
         if ($newRoom) {
             return ['message' => "Chỉnh sửa phòng thành công"];
@@ -58,6 +79,12 @@ class RoomController extends Controller
     public function delete(Request $request)
     {
         $room = ChatRoom::find($request->id);
+        //delete old image
+        $arrayImage = explode('/', $room->thumbnail);
+        $oldImage = end($arrayImage);
+        if ($oldImage !== 'default.jpg') {
+            unlink(public_path('images/chat/') . $oldImage);
+        }
         $status =  $room->delete();
         return $status;
     }

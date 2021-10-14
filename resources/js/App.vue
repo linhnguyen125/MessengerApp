@@ -24,18 +24,15 @@
 
                     <div class="dropdown">
                         <button
-                            class="btn btn-secondary dropdown-toggle"
-                            type="button"
-                            id="dropdownMenuButton"
+                            class="btn btn-secondary"
+                            id="userlogin"
                             data-toggle="dropdown"
-                            aria-haspopup="true"
-                            aria-expanded="false"
                         >
                             {{ userLogin.name }}
                         </button>
                         <div
                             class="dropdown-menu"
-                            aria-labelledby="dropdownMenuButton"
+                            aria-labelledby="userlogin"
                         >
                             <a
                                 class="dropdown-item"

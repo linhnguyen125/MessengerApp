@@ -10,7 +10,7 @@
             @click="chat.isPrivateChatExpand = !chat.isPrivateChatExpand"
         >
             <div class="img_cont">
-                <img src="https://static.turbosquid.com/Preview/001292/481/WV/_D.jpg" class="rounded-circle user_img"
+                <img :src="`${chat.selectedReceiver.avatar}`" class="rounded-circle user_img"
                      style="width: 40px; height: 40px;">
                 <span class="online_icon" :class="chat.isOnline ? 'online' : 'offline'" style="bottom: -3px;"></span>
             </div>
@@ -22,7 +22,6 @@
                 <i
                     data-toggle="tooltip"
                     data-placement="top"
-                    title="Message Color"
                     class="fas fa-circle"
                     @click.stop="toggleColorPicker"
                     style="cursor: pointer;"
@@ -59,7 +58,7 @@
             </div>
             <div class="d-flex justify-content-start mb-4" v-if="chat.isSelectedReceiverTyping">
                 <div class="img_cont_msg">
-                    <img src="https://static.turbosquid.com/Preview/001292/481/WV/_D.jpg"
+                    <img :src="`${chat.selectedReceiver.avatar}`"
                          class="rounded-circle user_img_msg">
                 </div>
                 <div class="msg_container">
@@ -205,7 +204,7 @@
         top: 17px;
 
         i {
-            font-size: 22px;
+            font-size: 14px;
         }
     }
 

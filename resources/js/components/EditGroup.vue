@@ -24,6 +24,26 @@
                         v-model="description"
                     />
                 </div>
+                <div class="row">
+                    <div class="form-group col-md-9">
+                        <label for="thumbnail">Ảnh đại diện</label>
+                        <input
+                            type="file"
+                            class="form-control-file"
+                            id="thumbnail"
+                            ref="file"
+                            v-on:change="onFileChange"
+                        />
+                    </div>
+                    <div v-if="image" class="col-md-3">
+                        <img
+                            :src="image"
+                            class="img-response"
+                            height="70px"
+                            width="auto"
+                        />
+                    </div>
+                </div>
                 <button
                     type="submit"
                     class="btn btn-primary"
@@ -52,20 +72,35 @@ export default {
         return {
             name: "",
             description: "",
+            image: "",
             roomId: this.$route.params.roomId,
             isLoading: false
         };
     },
     methods: {
-        async getRoom(){
+        async getRoom() {
             try {
                 const res = await axios.get(`${this.roomId}`);
                 console.log(res.data);
                 this.name = res.data.name;
                 this.description = res.data.description;
+                this.image = res.data.thumbnail;
             } catch (error) {
                 console.log(error);
             }
+        },
+        onFileChange(e) {
+            let files = e.target.files || e.dataTransfer.files;
+            if (!files.length) return;
+            this.createImage(files[0]);
+        },
+        createImage(file) {
+            let reader = new FileReader();
+            let vm = this;
+            reader.onload = e => {
+                vm.image = e.target.result;
+            };
+            reader.readAsDataURL(file);
         },
         async editRoom(event) {
             event.preventDefault();
@@ -73,9 +108,10 @@ export default {
                 this.isLoading = true;
                 const res = await axios.post(`${this.roomId}`, {
                     name: this.name,
-                    description: this.description
+                    description: this.description,
+                    thumbnail: this.image
                 });
-                console.log(res.message);
+                console.log(res);
             } catch (error) {
                 console.log(error);
             } finally {
@@ -84,7 +120,7 @@ export default {
             }
         }
     },
-    created(){
+    created() {
         this.getRoom();
     }
 };
