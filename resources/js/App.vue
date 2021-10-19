@@ -259,7 +259,7 @@ html {
     width: 15px;
     background-color: #4cd137;
     border-radius: 50%;
-    bottom: 17px;
+    bottom: 0px;
     right: 0;
     border: 2px solid white;
 }

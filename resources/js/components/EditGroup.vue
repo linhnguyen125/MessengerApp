@@ -3,7 +3,7 @@
         class="row justify-content-center h-100 w-75"
         style="margin: 0px auto;"
     >
-        <div class="col-md-8 chat">
+        <div class="col-md-8 chat contacts_card">
             <h3>Chỉnh sửa phòng chat</h3>
             <form @submit="editRoom">
                 <div class="form-group">
@@ -129,5 +129,12 @@ export default {
 <style scoped>
 .none {
     display: none;
+}
+
+.contacts_card {
+    /* height: 350px; */
+    border-radius: 15px !important;
+    background-color: rgba(0, 0, 0, 0.4) !important;
+    padding: 30px 20px;
 }
 </style>
