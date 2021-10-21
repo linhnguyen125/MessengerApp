@@ -135,6 +135,6 @@ export default {
     /* height: 350px; */
     border-radius: 15px !important;
     background-color: rgba(0, 0, 0, 0.4) !important;
-    padding: 30px 20px;
+    padding: 40px 60px;
 }
 </style>

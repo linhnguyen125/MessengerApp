@@ -20,7 +20,7 @@ Auth::routes();
 Route::get('auth/redirect/{provider_name}', 'Auth\SocialController@redirect')->name('redirect');
 Route::get('auth/callback/{provider_name}', 'Auth\SocialController@callback');
 
-Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/home', 'HomeController@index');
 
 Route::get('/user-login', 'HomeController@userLogin');
 

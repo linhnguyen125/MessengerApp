@@ -21,29 +21,18 @@
                     >
                         <input type="hidden" name="_token" :value="csrfToken" />
                     </form>
-
-                    <div class="dropdown">
-                        <button
-                            class="btn btn-secondary"
-                            id="userlogin"
-                            data-toggle="dropdown"
-                        >
-                            {{ userLogin.name }}
-                        </button>
-                        <div
-                            class="dropdown-menu"
-                            aria-labelledby="userlogin"
-                        >
-                            <a
-                                class="dropdown-item"
-                                href="/logout"
-                                onclick="event.preventDefault();
-                                document.getElementById('logout-form').submit();"
-                                >Logout</a
-                            >
-                            <a class="dropdown-item" href="/home">Home</a>
-                        </div>
-                    </div>
+                    <router-link
+                        to="/home"
+                        tag="a"
+                        class="btn btn-success text-white"
+                        >{{ userLogin.name }}</router-link
+                    >
+                    <a
+                        class="btn btn-danger"
+                        href="/logout"
+                        onclick="event.preventDefault(); document.getElementById('logout-form').submit();"
+                        >Logout</a
+                    >
                 </div>
             </div>
             <transition :name="transitionName" mode="out-in" appear>
@@ -63,7 +52,7 @@ export default {
             csrfToken: document.head.querySelector('meta[name="csrf-token"]')
                 .content,
             transitionName: "fade",
-            userLogin: {},
+            userLogin: {}
         };
     },
     methods: {
@@ -76,7 +65,7 @@ export default {
             } catch (error) {
                 console.log(error);
             }
-        },
+        }
     },
     watch: {
         "$route.name": function(newValue, oldValue) {

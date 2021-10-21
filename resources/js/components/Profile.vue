@@ -4,10 +4,10 @@
         style="margin: 0px auto;"
     >
         <div class="col-md-8 chat contacts_card">
-            <h3>Thêm phòng chat</h3>
-            <form @submit="addRoom" enctype="multipart/form-data">
+            <h3>Thông tin cá nhân</h3>
+            <form @submit="updateProfile" enctype="multipart/form-data">
                 <div class="form-group">
-                    <label for="name">Tên phòng</label>
+                    <label for="name">Tên</label>
                     <input
                         type="text"
                         class="form-control"
@@ -16,21 +16,22 @@
                     />
                 </div>
                 <div class="form-group">
-                    <label for="description">Mô tả phòng</label>
+                    <label for="email">Email</label>
                     <input
                         type="text"
                         class="form-control"
-                        id="description"
-                        v-model="description"
+                        id="email"
+                        readonly
+                        v-model="email"
                     />
                 </div>
                 <div class="row">
                     <div class="form-group col-md-9">
-                        <label for="thumbnail">Ảnh đại diện</label>
+                        <label for="avatar">Ảnh đại diện</label>
                         <input
                             type="file"
                             class="form-control-file"
-                            id="thumbnail"
+                            id="avatar"
                             ref="file"
                             v-on:change="onFileChange"
                         />
@@ -68,16 +69,29 @@ import axios from "axios";
 import swal from "sweetalert";
 
 export default {
-    name: "AddGroup",
+    name: "Profile",
     data() {
         return {
+            id: "",
             name: "",
-            description: "",
+            email: "",
             image: "",
             isLoading: false
         };
     },
     methods: {
+        async getProfile() {
+            try {
+                const res = await axios.get(`/home`);
+                console.log(res.data);
+                this.id = res.data.id;
+                this.name = res.data.name;
+                this.email = res.data.email;
+                this.image = res.data.avatar;
+            } catch (error) {
+                console.log(error);
+            }
+        },
         onFileChange(e) {
             let files = e.target.files || e.dataTransfer.files;
             if (!files.length) return;
@@ -91,25 +105,25 @@ export default {
             };
             reader.readAsDataURL(file);
         },
-        async addRoom(event) {
+        async updateProfile(event) {
             event.preventDefault();
             try {
                 this.isLoading = true;
-                const res = await axios.post(`/add-room`, {
+                const res = await axios.post(`/update/${this.id}`, {
                     name: this.name,
-                    description: this.description,
-                    thumbnail: this.image
+                    avatar: this.image
                 });
                 console.log(res);
             } catch (error) {
                 console.log(error);
             } finally {
                 this.isLoading = false;
-                this.name = "";
-                this.description = "";
-                swal("Success!", "Tạo group chat thành công!", "success");
+                swal("Success!", "Chỉnh sửa thông tin thành công", "success");
             }
         }
+    },
+    created() {
+        this.getProfile();
     }
 };
 </script>
@@ -118,6 +132,7 @@ export default {
 .none {
     display: none;
 }
+
 .contacts_card {
     /* height: 350px; */
     border-radius: 15px !important;

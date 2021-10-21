@@ -25,7 +25,8 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+        $user = Auth::user();
+        return $user;
     }
 
     public function userLogin()
@@ -36,32 +37,31 @@ class HomeController extends Controller
 
     public function update($id, Request $request)
     {
-        $data = $request->validate([
-            'name' => ['required', 'min:10', 'max:50'],
-            'email' => ['required', 'max:50', 'string', 'email'],
-            'about_me' => ['required', 'min:10', 'max:255']
-        ]);
-        unset($data['_token']);
+        $user = User::find($id);
+        if ($user->avatar === $request->avatar) {
+            $avatar = $request->avatar;
+        } else {
+            if ($request->get('avatar')) {
+                $image = $request->get('avatar');
+                $name = time() . '.' . explode('/', explode(':', substr($image, 0, strpos($image, ';')))[1])[1];
+                \Image::make($request->get('avatar'))->save(public_path('images/avatars/') . $name);
+                //delete old image
+                $arrayImage = explode('/', $user->thumbnail);
+                $oldImage = end($arrayImage);
+                unlink(public_path('images/avatars/') . $oldImage);
+                //create new image
+                $avatar = 'http://127.0.0.1:8000/images/avatars/' . $name;
+            }
+        }
+        $data = [
+            'name' => $request->name,
+            'avatar' => $avatar,
+        ];
         $status = User::where('id', $id)->update($data);
-        if ($status) {
-            return back()->with('success', 'Đã thay đổi thông tin thành công');
+        if ($status == 1) {
+            return ['message' => "Chỉnh sửa thông tin thành công"];
         } else {
-            return back()->with('error', 'Thay đổi thông tin thất bại, xin vui lòng thử lại sau');
+            return ['message' => "Chỉnh sửa thông tin thất bại"];
         }
-    }
-
-    public function updateAvatar($id, Request $request)
-    {
-        if ($request->hasFile('avatar')) {
-            $file = $request->avatar;
-            $fileName = $file->getClientOriginalName();
-            $path = 'http://127.0.0.1:8000/images/avatars/' . $fileName;
-            $file->move('images/avatars', $fileName);
-        } else {
-            return back();
-        }
-
-        User::where('id', $id)->update(['avatar' => $path]);
-        return back();
     }
 }
