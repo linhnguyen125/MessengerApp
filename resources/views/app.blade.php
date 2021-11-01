@@ -21,7 +21,7 @@
     <meta name="description" content="Realtime chat app using Laravel, VueJS, Redis, SocketIO">
     <meta name="keywords" content="Realtime chat app, Laravel, VueJS, Redis, SocketIO">
 
-    <title>Realtime Chat | Laravel, VueJS, Redis, Laravel Echo, SocketIO</title>
+    <title>Messenger</title>
 
     <link rel="stylesheet" href="{{ mix('css/app.css') }}">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.0/css/bootstrap.min.css"

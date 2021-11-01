@@ -32464,7 +32464,7 @@ var render = function() {
     },
     [
       _c("div", { staticClass: "col-md-8 chat contacts_card" }, [
-        _c("h3", [_vm._v("Thêm phòng chat")]),
+        _c("h3", { staticClass: "text-white" }, [_vm._v("Thêm phòng chat")]),
         _vm._v(" "),
         _c(
           "form",
@@ -32679,7 +32679,9 @@ var render = function() {
     },
     [
       _c("div", { staticClass: "col-md-8 chat contacts_card" }, [
-        _c("h3", [_vm._v("Chỉnh sửa phòng chat")]),
+        _c("h3", { staticClass: "text-white" }, [
+          _vm._v("Chỉnh sửa phòng chat")
+        ]),
         _vm._v(" "),
         _c("form", { on: { submit: _vm.editRoom } }, [
           _c("div", { staticClass: "form-group" }, [
@@ -33478,7 +33480,7 @@ var render = function() {
     },
     [
       _c("div", { staticClass: "col-md-8 chat contacts_card" }, [
-        _c("h3", [_vm._v("Thông tin cá nhân")]),
+        _c("h3", { staticClass: "text-white" }, [_vm._v("Thông tin cá nhân")]),
         _vm._v(" "),
         _c(
           "form",

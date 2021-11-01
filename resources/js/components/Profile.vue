@@ -4,7 +4,7 @@
         style="margin: 0px auto;"
     >
         <div class="col-md-8 chat contacts_card">
-            <h3>Thông tin cá nhân</h3>
+            <h3 class="text-white">Thông tin cá nhân</h3>
             <form @submit="updateProfile" enctype="multipart/form-data">
                 <div class="form-group">
                     <label for="name">Tên</label>

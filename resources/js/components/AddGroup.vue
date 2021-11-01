@@ -4,7 +4,7 @@
         style="margin: 0px auto;"
     >
         <div class="col-md-8 chat contacts_card">
-            <h3>Thêm phòng chat</h3>
+            <h3 class="text-white">Thêm phòng chat</h3>
             <form @submit="addRoom" enctype="multipart/form-data">
                 <div class="form-group">
                     <label for="name">Tên phòng</label>
