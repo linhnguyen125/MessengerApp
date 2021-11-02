@@ -50,7 +50,7 @@ class HomeController extends Controller
                 $oldImage = end($arrayImage);
                 unlink(public_path('images/avatars/') . $oldImage);
                 //create new image
-                $avatar = 'http://127.0.0.1:8000/images/avatars/' . $name;
+                $avatar = 'http://54.255.90.148/images/avatars/' . $name;
             }
         }
         $data = [
