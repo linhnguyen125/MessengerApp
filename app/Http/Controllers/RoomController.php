@@ -24,7 +24,7 @@ class RoomController extends Controller
             $image = $request->get('thumbnail');
             $name = time() . '.' . explode('/', explode(':', substr($image, 0, strpos($image, ';')))[1])[1];
             \Image::make($request->get('thumbnail'))->save(public_path('images/chat/') . $name);
-            $data['thumbnail'] = 'http://54.255.90.148/images/chat/' . $name;
+            $data['thumbnail'] = env('PRODUCTION_URL') . 'images/chat/' . $name;
         } 
 
         $newRoom = ChatRoom::create($data);
@@ -58,7 +58,7 @@ class RoomController extends Controller
                     unlink(public_path('images/chat/') . $oldImage);
                 }
                 //create new image
-                $thumbnail = 'http://54.255.90.148/images/chat/' . $name;
+                $thumbnail = env('PRODUCTION_URL') . 'images/chat/' . $name;
             }
         }
 
