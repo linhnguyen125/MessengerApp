@@ -411,7 +411,7 @@ html {
 .img_cont_msg {
     width: 40px;
     height: 40px;
-
+	overflow: hidden;
     span {
         width: 36px;
         height: 36px;

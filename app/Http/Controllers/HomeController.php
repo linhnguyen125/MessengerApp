@@ -45,10 +45,6 @@ class HomeController extends Controller
                 $image = $request->get('avatar');
                 $name = time() . '.' . explode('/', explode(':', substr($image, 0, strpos($image, ';')))[1])[1];
                 \Image::make($request->get('avatar'))->save(public_path('images/avatars/') . $name);
-                //delete old image
-                $arrayImage = explode('/', $user->thumbnail);
-                $oldImage = end($arrayImage);
-                unlink(public_path('images/avatars/') . $oldImage);
                 //create new image
                 $avatar = 'http://54.255.90.148/images/avatars/' . $name;
             }

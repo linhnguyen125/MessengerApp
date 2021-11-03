@@ -194,7 +194,12 @@ export default {
     background-color: #f1f0f0;
     color: #444950;
 }
+
 img {
     padding: 1px !important;
+}
+
+.img_cont_msg {
+overflow: hidden !important;
 }
 </style>
