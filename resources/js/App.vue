@@ -25,7 +25,7 @@
                         to="/home"
                         tag="a"
                         class="btn btn-success text-white"
-                        >{{ userLogin.name }}</router-link
+                        >Tài Khoản</router-link
                     >
                     <a
                         class="btn btn-danger"
