@@ -46,7 +46,7 @@ class HomeController extends Controller
                 $name = time() . '.' . explode('/', explode(':', substr($image, 0, strpos($image, ';')))[1])[1];
                 \Image::make($request->get('avatar'))->save(public_path('images/avatars/') . $name);
                 //create new image
-                $avatar = env('PRODUCTION_URL') . 'images/avatars/' . $name;
+                $avatar = env('APP_URL') . 'images/avatars/' . $name;
             }
         }
         $data = [
