@@ -33788,7 +33788,16 @@ var render = function() {
             }
           }),
           _vm._v(" "),
-          _vm._m(0)
+          _c("div", { staticClass: "input-group-append" }, [
+            _c(
+              "span",
+              {
+                staticClass: "input-group-text send_btn",
+                on: { click: _vm.saveMessage }
+              },
+              [_c("i", { staticClass: "fas fa-location-arrow" })]
+            )
+          ])
         ])
       ]),
       _vm._v(" "),
@@ -33804,18 +33813,7 @@ var render = function() {
     1
   )
 }
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "input-group-append" }, [
-      _c("span", { staticClass: "input-group-text send_btn" }, [
-        _c("i", { staticClass: "fas fa-location-arrow" })
-      ])
-    ])
-  }
-]
+var staticRenderFns = []
 render._withStripped = true
 
 

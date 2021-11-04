@@ -69,7 +69,7 @@
                     @keyup.enter="saveMessage"
                 />
                 <div class="input-group-append">
-                    <span class="input-group-text send_btn"
+                    <span class="input-group-text send_btn" @click="saveMessage"
                         ><i class="fas fa-location-arrow"></i
                     ></span>
                 </div>
