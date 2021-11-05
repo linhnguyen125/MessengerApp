@@ -5,6 +5,7 @@ import Room from "./pages/Room";
 import AddGroup from "./components/AddGroup";
 import EditGroup from "./components/EditGroup";
 import Profile from "./components/Profile";
+import Member from "./components/Member"
 
 Vue.use(VueRouter);
 
@@ -28,6 +29,11 @@ const routes = [
         path: "/edit-room/:roomId",
         name: "edit.room",
         component: EditGroup
+    },
+    {
+        path: "/member/:roomId",
+        name: "member.room",
+        component: Member
     },
     {
         path: "/home",

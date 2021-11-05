@@ -60,4 +60,11 @@ class HomeController extends Controller
             return ['message' => "Chỉnh sửa thông tin thất bại"];
         }
     }
+
+    public function listUser()
+    {
+        $id[] = Auth::user()->id;
+        $user = User::select('id', 'name', 'email')->whereNotIn('id', $id)->get();
+        return $user;
+    }
 }

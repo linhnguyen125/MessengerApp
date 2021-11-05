@@ -131,7 +131,7 @@ export default {
         return {
             searchQuery: "",
             rooms: {},
-            tempRooms: {}
+            tempRooms: {},
         };
     },
     // computed: {
@@ -157,11 +157,10 @@ export default {
                 const res = await axios.post(`delete-room`, {
                     id: id
                 });
-                console.log(res);
+                swal(res.data);
             } catch (error) {
                 console.log(error);
             } finally {
-                swal("Success!", "Xóa group chat thành công!", "success");
                 this.getRooms();
             }
         }

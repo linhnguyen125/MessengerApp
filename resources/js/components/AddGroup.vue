@@ -44,9 +44,21 @@
                         />
                     </div>
                 </div>
+                <div>
+                    <multiselect
+                        v-model="taggingSelected"
+                        placeholder="Thêm thành viên"
+                        label="name"
+                        track-by="id"
+                        :options="taggingOptions"
+                        :multiple="true"
+                        :taggable="true"
+                    >
+                    </multiselect>
+                </div>
                 <button
                     type="submit"
-                    class="btn btn-primary"
+                    class="btn btn-primary mt-2"
                     :class="{ none: isLoading }"
                 >
                     Submit
@@ -66,6 +78,7 @@
 <script>
 import axios from "axios";
 import swal from "sweetalert";
+import Multiselect from "vue-multiselect";
 
 export default {
     name: "AddGroup",
@@ -74,7 +87,9 @@ export default {
             name: "",
             description: "",
             image: "",
-            isLoading: false
+            isLoading: false,
+            taggingSelected: [],
+            taggingOptions: []
         };
     },
     methods: {
@@ -98,18 +113,32 @@ export default {
                 const res = await axios.post(`/add-room`, {
                     name: this.name,
                     description: this.description,
-                    thumbnail: this.image
+                    thumbnail: this.image,
+                    members: this.taggingSelected
                 });
-                console.log(res);
+                swal(res.data.message);
             } catch (error) {
                 console.log(error);
             } finally {
                 this.isLoading = false;
                 this.name = "";
                 this.description = "";
-                swal("Success!", "Tạo group chat thành công!", "success");
+            }
+        },
+        async getUsers() {
+            try {
+                const res = await axios.get(`/list-users`);
+                this.taggingOptions = res.data;
+            } catch (error) {
+                console.log(error);
             }
         }
+    },
+    created() {
+        this.getUsers();
+    },
+    components: {
+        Multiselect
     }
 };
 </script>
@@ -125,3 +154,4 @@ export default {
     padding: 40px 60px;
 }
 </style>
+<style src="vue-multiselect/dist/vue-multiselect.min.css"></style>

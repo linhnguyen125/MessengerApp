@@ -2,20 +2,33 @@
     <div class="card">
         <div class="card-header msg_head">
             <div class="bd-highlight">
-                <div class="d-flex chat-info">
-                    <div>
-                        <img
-                            class="rounded-circle img-thumbnail"
-                            :src="`${currentRoom.thumbnail}`"
-                        />
+                <div class="d-flex chat-info justify-content-between">
+                    <div class="d-flex">
+                        <div class="thumbnail">
+                            <img
+                                class="rounded-circle img-thumbnail"
+                                :src="`${currentRoom.thumbnail}`"
+                            />
+                        </div>
+
+                        <div class="d-flex flex-column">
+                            <div class="user_info">
+                                <span>{{ currentRoom.name }}</span>
+                            </div>
+                            <div class="description text-white ml-3">
+                                {{ currentRoom.description }}
+                            </div>
+                        </div>
                     </div>
-                    <div class="d-flex flex-column">
-                        <div class="user_info">
-                            <span>{{ currentRoom.name }}</span>
-                        </div>
-                        <div class="description text-white ml-3">
-                            {{ currentRoom.description }}
-                        </div>
+
+                    <div class="member text-white">
+                        <router-link
+                            tag="a"
+                            class="text-white"
+                            :to="{name: 'member.room', params: {roomId: currentRoom.id}}"
+                        >
+                            <span><i class="fas fa-users"></i></span>
+                        </router-link>
                     </div>
                 </div>
             </div>
@@ -164,5 +177,8 @@ img.img-thumbnail {
 }
 div.chat-info {
     align-items: center;
+}
+div.thumbnail {
+    padding-top: 5px;
 }
 </style>

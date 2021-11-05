@@ -24,6 +24,8 @@ Route::get('/home', 'HomeController@index');
 
 Route::get('/user-login', 'HomeController@userLogin');
 
+Route::get('/list-users', 'HomeController@listUser');
+
 Route::get('/', 'AppController@index')->middleware('auth');
 
 Route::get('/messages', 'MessageController@index')->middleware('auth');
@@ -47,4 +49,14 @@ Route::get('edit-room/{id}', 'RoomController@show')->middleware('auth');
 Route::post('edit-room/{id}', 'RoomController@update')->middleware('auth');
 
 Route::post('delete-room', 'RoomController@delete')->middleware('auth');
+
+Route::get('/list-users-not-in-room/{id}', 'RoomController@listUserNotInRooms');
+
+Route::get('/list-member/{id}', 'RoomController@listMemberById');
+
+Route::get('/user-created/{id}', 'RoomController@userCreated');
+
+Route::post('/delete-member', 'RoomController@deleteMember');
+
+Route::post('/add-member', 'RoomController@addMember');
 

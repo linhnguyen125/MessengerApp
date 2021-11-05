@@ -11,7 +11,9 @@ class AppController extends Controller
 {
     public function index()
     {
-        $data = ['user' => Auth::user(), 'rooms' => ChatRoom::all(), 'emojis' => Emoji::all()];
+        $rooms = Auth::user()->chatRooms;
+        $rooms[] = ChatRoom::find(1);
+        $data = ['user' => Auth::user(), 'rooms' => $rooms, 'emojis' => Emoji::all()];
         return view('app', ['data' => $data]);
     }
 }
