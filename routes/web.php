@@ -20,25 +20,34 @@ Auth::routes();
 Route::get('auth/redirect/{provider_name}', 'Auth\SocialController@redirect')->name('redirect');
 Route::get('auth/callback/{provider_name}', 'Auth\SocialController@callback');
 
+// HomeController
 Route::get('/home', 'HomeController@index');
 
 Route::get('/user-login', 'HomeController@userLogin');
 
 Route::get('/list-users', 'HomeController@listUser');
 
+Route::post('/update/{id}', 'HomeController@update')->name('update')->middleware('auth');
+
+Route::post('/updateAvatar/{id}', 'HomeController@updateAvatar')->name('updateAvatar')->middleware('auth');
+
+//AppController
 Route::get('/', 'AppController@index')->middleware('auth');
+
+Route::get('/rooms/{any}', 'AppController@index')->where('any', '.*')->middleware('auth'); // catch all routes or else it will return 404 with Vue router in history mode
+
+//MessageController
 
 Route::get('/messages', 'MessageController@index')->middleware('auth');
 
 Route::post('/messages', 'MessageController@store')->middleware('auth');
 
+
+// ReactController
 Route::post('/reactions', 'ReactionController@react')->middleware('auth');
 
-Route::get('/rooms/{any}', 'AppController@index')->where('any', '.*')->middleware('auth'); // catch all routes or else it will return 404 with Vue router in history mode
 
-Route::post('/update/{id}', 'HomeController@update')->name('update')->middleware('auth');
-
-Route::post('/updateAvatar/{id}', 'HomeController@updateAvatar')->name('updateAvatar')->middleware('auth');
+//RoomController
 
 Route::post('/add-room', 'RoomController@add')->middleware('auth');
 

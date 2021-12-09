@@ -118,6 +118,7 @@ class RoomController extends Controller
     public function delete(Request $request)
     {
         $room = ChatRoom::find($request->id);
+
         //delete old image
         $arrayImage = explode('/', $room->thumbnail);
         $oldImage = end($arrayImage);
